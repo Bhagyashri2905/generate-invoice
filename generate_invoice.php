@@ -5,8 +5,8 @@ $URL = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans";
 
 header("Content-Type: application/json");
 
-// ✅ Get POST data (from Zoho or Postman)
-$input = $_POST;
+// ✅ Get JSON body from Zoho/Postman
+$input = json_decode(file_get_contents("php://input"), true);
 
 $merchant_data = json_encode($input);
 $enc_request = encrypt($merchant_data, $working_key);
