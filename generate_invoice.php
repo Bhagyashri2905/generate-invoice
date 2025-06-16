@@ -4,12 +4,14 @@ $access_code = 'ATJ5ESBC4GUHISZMC7';
 
 header("Content-Type: application/json");
 
-// ✅ Use form data sent by Deluge
-$input = $_POST;
+// ✅ Step 1: Get encoded string from POST (form field)
+parse_str($_POST['form'], $input);
 
+// ✅ Step 2: Encrypt JSON
 $merchant_data = json_encode($input);
 $enc_request = encrypt($merchant_data, $working_key);
 
+// ✅ Step 3: Return result to Zoho
 echo json_encode([
   "encRequest" => $enc_request,
   "accessCode" => $access_code
