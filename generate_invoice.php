@@ -4,14 +4,14 @@ $access_code = 'ATJ5ESBC4GUHISZMC7';
 
 header("Content-Type: application/json");
 
-// ✅ Step 1: Get encoded string from POST (form field)
-parse_str($_POST['form'], $input);
+// ✅ Get JSON body as associative array
+$input = json_decode(file_get_contents("php://input"), true);
 
-// ✅ Step 2: Encrypt JSON
+// ✅ Encrypt the JSON
 $merchant_data = json_encode($input);
 $enc_request = encrypt($merchant_data, $working_key);
 
-// ✅ Step 3: Return result to Zoho
+// ✅ Respond back to Zoho
 echo json_encode([
   "encRequest" => $enc_request,
   "accessCode" => $access_code
