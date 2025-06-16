@@ -4,16 +4,12 @@ $access_code = 'ATJ5ESBC4GUHISZMC7';
 
 header("Content-Type: application/json");
 
-// ✅ Get form data from $_POST
-$input = $_POST;
+// ✅ Read raw JSON instead of $_POST
+$input = json_decode(file_get_contents("php://input"), true);
 
-// ✅ Convert to JSON string
 $merchant_data = json_encode($input);
-
-// ✅ Encrypt JSON string
 $enc_request = encrypt($merchant_data, $working_key);
 
-// ✅ Respond to Zoho
 echo json_encode([
     "encRequest" => $enc_request,
     "accessCode" => $access_code
