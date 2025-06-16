@@ -4,7 +4,7 @@ $access_code = 'ATJ5ESBC4GUHISZMC7';
 
 header("Content-Type: application/json");
 
-// ✅ Change here: use $_POST instead of JSON input
+// ✅ Use form data sent by Deluge
 $input = $_POST;
 
 $merchant_data = json_encode($input);
